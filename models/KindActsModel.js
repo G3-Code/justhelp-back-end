@@ -35,7 +35,7 @@ function update(id, kindAct) {
   return db("kind_acts")
     .where({ id })
     .update(kindAct)
-    .then(count => (count > 0 ? findById(count) : null));
+    .then(count => (count > 0 ? findById(id) : null));
 }
 
 function remove(id) {
