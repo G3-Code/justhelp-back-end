@@ -10,7 +10,9 @@ server.use(helmet());
 server.use(cors());
 
 server.get("/", (req, res) => {
-  res.json({ message: "The random act generator api is up and running!" });
+  res
+    .status(201)
+    .json({ message: "The random act generator api is up and running!" });
 });
 
 server.use("/", userAuthRouter);
