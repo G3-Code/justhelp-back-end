@@ -16,7 +16,7 @@ exports.up = function(knex, Promise) {
       .unique();
 
     // COLUMN NAME:PHONE NUMBER
-    users.integer("phone_number", 10);
+    users.string("phone_number", 10).notNullable();
 
     // COLUMN NAME:PASSWORD
     users.string("password", 128).notNullable();
