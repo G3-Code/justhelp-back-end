@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const User = require("../models/UserModel");
-const authenticate = require("../auth/authenticate");
+const { authenticate } = require("../auth/authenticate");
 
 const bcrypt = require("bcryptjs");
 
@@ -18,15 +18,24 @@ router.put("/:id", authenticate, async (req, res) => {
           userToUpdate.phone_number ||
           userToUpdate.password)
       ) {
+        console.log(`:: USER UPDATE :: ALL CREDENTIALS AVAILABLE::`);
         const email = userToUpdate.email;
+        console.log(`::USER UPDATE :: EMAIL IS :: ${email}`);
         const userValid = User.findBy({ email });
         if (userValid) {
+          console.log(`::USER UPDATE :: VALID USER ::`);
           if (userToUpdate.password) {
             const hash = bcrypt.hashSync(userToUpdate.password, 10);
             userToUpdate.password = hash;
+            console.log(`::USER UPDATE :: PASSWORD HASHED ::`);
           }
-          const updated = await User.update(userId, user);
-          res.status(201).json(updated);
+          const user = await User.update(userId, userToUpdate);
+          console.log(`::USER UPDATE :: USER IS :: ${JSON.stringify(user)}`);
+          res.status(201).json({ user });
+        } else {
+          res.status(404).json({
+            message: `Sorry, but a profile with the email - ${email} does not exist.`
+          });
         }
       } else {
         res
@@ -46,3 +55,5 @@ router.put("/:id", authenticate, async (req, res) => {
     });
   }
 });
+
+module.exports = router;
