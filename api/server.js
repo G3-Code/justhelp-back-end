@@ -5,6 +5,7 @@ const server = express();
 
 const userAuthRouter = require("../routers/UserAuthRouter");
 const userRouter = require("../routers/UserRouter");
+const contactRouter = require("../routers/ContactsRouter");
 
 server.use(express.json());
 server.use(helmet());
@@ -18,4 +19,5 @@ server.get("/", (req, res) => {
 
 server.use("/", userAuthRouter);
 server.use("/user", userRouter);
+server.use("/contact", contactRouter);
 module.exports = server;
