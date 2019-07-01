@@ -9,9 +9,10 @@ module.exports = {
   remove
 };
 
-function add(kindAct) {
-  db("kind_acts").insert(kindAct);
-  return findBy({ description: kindAct.description, user_id: kindAct.user_id });
+async function add(kindAct) {
+  const result = await db("kind_acts").insert(kindAct);
+  const filter = { description: kindAct.description, user_id: kindAct.user_id };
+  return findBy(filter);
 }
 
 function findBy(filter) {
