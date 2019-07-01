@@ -22,7 +22,9 @@ function findBy(filter) {
 }
 
 function findById(id) {
-  return db("kind_acts").where({ id });
+  return db("kind_acts")
+    .where({ id })
+    .first();
 }
 
 function findByUserId(userId) {

@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const KindAct = require("../models/KindActsModel");
+const { authenticate } = require("../auth/authenticate");
 
-router.post("/", async (req, res) => {
+router.post("/", authenticate, async (req, res) => {
   try {
     const kindActToAdd = req.body;
     if (kindActToAdd) {
@@ -17,6 +18,40 @@ router.post("/", async (req, res) => {
     res
       .status(500)
       .json({ message: "Sorry something went wrong when adding a kind act!" });
+  }
+});
+
+router.get("/:id", authenticate, async (req, res) => {
+  try {
+    const actId = req.params.id;
+    const kindAct = await KindAct.findById(actId);
+    if (kindAct) {
+      res.status(200).json({ kindAct });
+    } else {
+      res.status(404).json({ message: "The requested act was not found." });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message:
+        "Sorry something went wrong while trying to retrieve the kind act."
+    });
+  }
+});
+
+router.get("/user/:id", authenticate, async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const kindAct = await KindAct.findByUserId(userId);
+    if (kindAct) {
+      res.status(200).json({ kindAct });
+    } else {
+      res.status(404).json({ message: "The requested act was not found." });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message:
+        "Sorry something went wrong while trying to retrieve the kind act."
+    });
   }
 });
 
