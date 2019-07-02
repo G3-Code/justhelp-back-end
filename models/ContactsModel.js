@@ -10,10 +10,11 @@ module.exports = {
 
 async function add(contact) {
   await db("contacts").insert(contact);
-  return findBy({
-    contact_first_name: contact.contact_first_name,
-    user_id: contact.user_id
-  });
+  // return findBy({
+  //   contact_first_name: contact.contact_first_name,
+  //   user_id: contact.user_id
+  // });
+  return findByUserId(contact.user_id);
 }
 
 async function findBy(filter) {
@@ -39,10 +40,10 @@ function findById(id) {
 }
 
 async function update(id, contact) {
-  const result = await db("contacts")
+  await db("contacts")
     .where({ id })
-    .update(contact)
-    .then(count => (count > 0 ? this.findById(id) : null));
+    .update(contact);
+  let result = await findByUserId(contact.user_id);
   console.log(`:: CONTACTS MODEL :: UPDATE CONTACT :: RESULT IS ${result}`);
   return result;
 }
