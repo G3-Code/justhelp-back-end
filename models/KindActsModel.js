@@ -57,11 +57,14 @@ async function findByUserId(userId) {
   }
 }
 
-function update(id, kindAct) {
-  return db("kind_acts")
+async function update(id, kindAct) {
+  console.log(":::::::::::::::::KIND ACT MODEL - UPDATE :::::::::::::::::::::");
+  await db("kind_acts")
     .where({ id })
-    .update(kindAct)
-    .then(count => (count > 0 ? findById(id) : null));
+    .update(kindAct);
+  let result = await findByUserId(kindAct.user_id);
+  console.log(`:: KIND ACT MODEL :: UPDATE KIND ACT :: RESULT IS ${result}`);
+  return result;
 }
 
 function remove(id) {
