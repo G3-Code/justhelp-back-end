@@ -57,6 +57,23 @@ router.get("/user/:id", authenticate, async (req, res) => {
   }
 });
 
+router.get("/userhp/:id", authenticate, async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const acts = await KindAct.findByUserIdForHP(userId);
+    if (acts) {
+      res.status(200).json({ acts });
+    } else {
+      res.status(404).json({ message: "The requested act was not found." });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message:
+        "Sorry something went wrong while trying to retrieve the kind act."
+    });
+  }
+});
+
 router.put("/:id", authenticate, async (req, res) => {
   try {
     const kindActToUpdate = req.body;
