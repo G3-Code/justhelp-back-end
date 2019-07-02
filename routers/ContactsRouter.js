@@ -7,8 +7,8 @@ router.post("/", authenticate, async (req, res) => {
   try {
     const contactToAdd = req.body;
     if (contactToAdd) {
-      const contact = await Contacts.add(contactToAdd);
-      res.status(201).json({ contact });
+      const contacts = await Contacts.add(contactToAdd);
+      res.status(201).json({ contacts });
     } else {
       res.status(400).json({
         message: "The contact to add is not available in the request body."
@@ -21,9 +21,9 @@ router.post("/", authenticate, async (req, res) => {
 
 router.get("/:id", authenticate, async (req, res) => {
   try {
-    const contact = await Contacts.findById(req.params.id);
-    console.log(`:: CONTACT GET ROUTER :: contact is ${contact}`);
-    res.status(200).json({ contact });
+    const contacts = await Contacts.findById(req.params.id);
+    console.log(`:: CONTACT GET ROUTER :: contact is ${contacts}`);
+    res.status(200).json({ contacts });
   } catch (error) {
     res.status(500).json({
       message:
@@ -34,8 +34,8 @@ router.get("/:id", authenticate, async (req, res) => {
 
 router.get("/user/:id", authenticate, async (req, res) => {
   try {
-    const contact = await Contacts.findByUserId(req.params.id);
-    res.status(200).json({ contact });
+    const contacts = await Contacts.findByUserId(req.params.id);
+    res.status(200).json({ contacts });
   } catch (error) {
     res.status(500).json({
       message:
@@ -51,8 +51,8 @@ router.put("/:id", async (req, res) => {
     if (contactId && contactToBeUpdated) {
       const isContact = await Contacts.findById(contactId);
       if (isContact) {
-        const contact = await Contacts.update(contactId, contactToBeUpdated);
-        res.status(200).json({ contact });
+        const contacts = await Contacts.update(contactId, contactToBeUpdated);
+        res.status(200).json({ contacts });
       } else {
         res.status(403).json({
           message: "Sorry, this contact does not exist in the database."

@@ -7,8 +7,8 @@ router.post("/", authenticate, async (req, res) => {
   try {
     const kindActToAdd = req.body;
     if (kindActToAdd) {
-      const kindAct = await KindAct.add(kindActToAdd);
-      res.status(201).json({ kindAct });
+      const acts = await KindAct.add(kindActToAdd);
+      res.status(201).json({ acts });
     } else {
       res
         .status(400)
@@ -24,9 +24,9 @@ router.post("/", authenticate, async (req, res) => {
 router.get("/:id", authenticate, async (req, res) => {
   try {
     const actId = req.params.id;
-    const kindAct = await KindAct.findById(actId);
-    if (kindAct) {
-      res.status(200).json({ kindAct });
+    const acts = await KindAct.findById(actId);
+    if (acts) {
+      res.status(200).json({ acts });
     } else {
       res.status(404).json({ message: "The requested act was not found." });
     }
@@ -41,9 +41,9 @@ router.get("/:id", authenticate, async (req, res) => {
 router.get("/user/:id", authenticate, async (req, res) => {
   try {
     const userId = req.params.id;
-    const kindAct = await KindAct.findByUserId(userId);
-    if (kindAct) {
-      res.status(200).json({ kindAct });
+    const acts = await KindAct.findByUserId(userId);
+    if (acts) {
+      res.status(200).json({ acts });
     } else {
       res.status(404).json({ message: "The requested act was not found." });
     }
@@ -60,8 +60,8 @@ router.put("/:id", authenticate, async (req, res) => {
     const kindActToUpdate = req.body;
     const actId = req.params.id;
     if (kindActToUpdate && actId) {
-      const kindAct = await KindAct.update(actId, kindActToUpdate);
-      res.status(200).json({ kindAct });
+      const acts = await KindAct.update(actId, kindActToUpdate);
+      res.status(200).json({ acts });
     } else {
       res.status(400).json({
         message:
