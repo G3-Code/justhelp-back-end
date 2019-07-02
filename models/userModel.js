@@ -24,7 +24,9 @@ function find() {
 }
 
 async function update(id, user) {
-  console.log(`:: USER-MODEL :: UPDATE ::`);
+  console.log(
+    `:: USER-MODEL :: UPDATE :: id is ${id} and user is ${JSON.stringify(user)}`
+  );
   const result = await db("users")
     .where({ id })
     .update(user)

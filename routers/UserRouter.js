@@ -56,4 +56,22 @@ router.put("/:id", authenticate, async (req, res) => {
   }
 });
 
+router.get("/:id", authenticate, async (req, res) => {
+  try {
+    const id = req.params.id;
+    const user = await User.findBy({ id });
+    if (user) {
+      res.status(200).json({ user });
+    } else {
+      res
+        .status(404)
+        .json({ message: "There is no such user in the database." });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: "Something went wrong when trying to get the user information."
+    });
+  }
+});
+
 module.exports = router;
