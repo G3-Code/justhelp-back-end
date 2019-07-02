@@ -5,7 +5,9 @@ const { authenticate } = require("../auth/authenticate");
 
 router.post("/", authenticate, async (req, res) => {
   try {
+    console.log(`:::: IN KIND ACTS ROUTER ::::`);
     const kindActToAdd = req.body;
+    console.log(`:::: KIND ACTS BODY IS :::: ${JSON.stringify(kindActToAdd)}`);
     if (kindActToAdd) {
       const acts = await KindAct.add(kindActToAdd);
       res.status(201).json({ acts });
@@ -42,6 +44,23 @@ router.get("/user/:id", authenticate, async (req, res) => {
   try {
     const userId = req.params.id;
     const acts = await KindAct.findByUserId(userId);
+    if (acts) {
+      res.status(200).json({ acts });
+    } else {
+      res.status(404).json({ message: "The requested act was not found." });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message:
+        "Sorry something went wrong while trying to retrieve the kind act."
+    });
+  }
+});
+
+router.get("/userhp/:id", authenticate, async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const acts = await KindAct.findByUserIdForHP(userId);
     if (acts) {
       res.status(200).json({ acts });
     } else {

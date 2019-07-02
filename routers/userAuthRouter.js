@@ -3,6 +3,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/UserModel");
 const jwtKey = require("../auth/secrets");
+const Contact = require("../models/ContactsModel");
+const KindAct = require("../models/KindActsModel");
 
 router.post("/register", async (req, res) => {
   try {
@@ -42,11 +44,15 @@ router.post("/login", async (req, res) => {
       console.log(`:: LOGIN :: USER IS FOUND :: ${user}`);
       if (user && bcrypt.compareSync(password, user.password)) {
         const token = generateToken(user);
+        const contacts = await Contact.findByUserId(user.id);
+        const acts = await KindAct.findByUserId(user.id);
         console.log(`:: LOGIN :: TOKEN GENERATED ::}`);
         res.status(200).json({
           message: `${user.first_name} is successfully logged in`,
           token,
-          user: user
+          user,
+          contacts,
+          acts
         });
       } else {
         res
