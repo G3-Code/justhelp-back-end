@@ -78,8 +78,10 @@ router.delete("/:id", async (req, res) => {
     const contact = await Contacts.findById(contactId);
     console.log(`:: CONTACT IS :: ${contact}`);
     if (contact) {
-      await Contacts.remove(contactId);
-      res.status(200).json({ message: "Contact successfully deleted." });
+      const contacts = await Contacts.remove(contactId);
+      res
+        .status(200)
+        .json({ message: "Contact successfully deleted.", contacts });
     } else {
       res.status(404).json({ message: "No such record available to delete." });
     }

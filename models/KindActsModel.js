@@ -11,8 +11,7 @@ module.exports = {
 
 async function add(kindAct) {
   const result = await db("kind_acts").insert(kindAct);
-  const filter = { description: kindAct.description, user_id: kindAct.user_id };
-  return findBy(filter);
+  return findByUserId(kindAct.user_id);
 }
 
 function findBy(filter) {

@@ -49,9 +49,17 @@ async function update(id, contact) {
 }
 
 async function remove(id) {
-  const result = await db("contacts")
+  const userId = await db("contacts")
+    .select("user_id")
+    .where({ id })
+    .first();
+  console.log(
+    "--------------------------------------------" + JSON.stringify(userId)
+  );
+  await db("contacts")
     .where({ id: id })
     .del();
+  const result = await findByUserId(userId.user_id);
   console.log(`:: CONTACTS MODEL :: DELETE CONTACT :: RESULT IS ${result}`);
   return result;
 }

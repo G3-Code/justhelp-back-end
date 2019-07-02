@@ -5,7 +5,9 @@ const { authenticate } = require("../auth/authenticate");
 
 router.post("/", authenticate, async (req, res) => {
   try {
+    console.log(`:::: IN KIND ACTS ROUTER ::::`);
     const kindActToAdd = req.body;
+    console.log(`:::: KIND ACTS BODY IS :::: ${JSON.stringify(kindActToAdd)}`);
     if (kindActToAdd) {
       const acts = await KindAct.add(kindActToAdd);
       res.status(201).json({ acts });
