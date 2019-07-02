@@ -27,8 +27,16 @@ function findById(id) {
     .first();
 }
 
-function findByUserId(userId) {
-  return db("kind_acts").where({ user_id: userId });
+async function findByUserId(userId) {
+  let result = await db("kind_acts").where({ user_id: userId });
+  console.log(`:: FIND BY USER ID LENGTH IS :: ${result}`);
+  if (result.length === 0) {
+    result = await db("kind_acts").where({ user_id: "1" });
+    console.log(`:: FIND BY USER ID LENGTH IS :: ${result.length}`);
+    return result;
+  } else {
+    return result;
+  }
 }
 
 function update(id, kindAct) {
