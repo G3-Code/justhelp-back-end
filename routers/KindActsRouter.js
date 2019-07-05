@@ -25,6 +25,7 @@ router.post("/", authenticate, async (req, res) => {
 
 router.get("/:id", authenticate, async (req, res) => {
   try {
+    console.log(`:: KIND ACTS ROUTER :: GET BY KIND ACTS ID ::`);
     const actId = req.params.id;
     const acts = await KindAct.findById(actId);
     if (acts) {
@@ -42,6 +43,7 @@ router.get("/:id", authenticate, async (req, res) => {
 
 router.get("/user/:id", authenticate, async (req, res) => {
   try {
+    console.log(`:: KINDS ACT ROUTER :: GET BY USER ID ::`);
     const userId = req.params.id;
     const acts = await KindAct.findByUserId(userId);
     if (acts) {
@@ -59,6 +61,7 @@ router.get("/user/:id", authenticate, async (req, res) => {
 
 router.get("/userhp/:id", authenticate, async (req, res) => {
   try {
+    console.log(`:: KINDS ACT ROUTER :: GET BY USER ID FOR HOME PAGE ::`);
     const userId = req.params.id;
     const acts = await KindAct.findByUserIdForHP(userId);
     if (acts) {
@@ -76,6 +79,7 @@ router.get("/userhp/:id", authenticate, async (req, res) => {
 
 router.put("/:id", authenticate, async (req, res) => {
   try {
+    console.log(`:: KIND ACTS ROUTER :: UPDATE USING KIND ACTS ID ::`);
     const kindActToUpdate = req.body;
     const actId = req.params.id;
     if (kindActToUpdate && actId) {
@@ -96,6 +100,7 @@ router.put("/:id", authenticate, async (req, res) => {
 
 router.delete("/:id", authenticate, async (req, res) => {
   try {
+    console.log(`:: KIND ACTS ROUTER :: DELETE USING KIND ACTS ID ::`);
     const actId = req.params.id;
     if (actId) {
       await KindAct.remove(actId);

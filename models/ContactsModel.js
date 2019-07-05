@@ -45,13 +45,11 @@ async function update(id, contact) {
 }
 
 async function remove(id) {
+  console.log(`:: CONTACTS MODEL :: REMOVE ::`);
   const userId = await db("contacts")
     .select("user_id")
     .where({ id })
     .first();
-  console.log(
-    "--------------------------------------------" + JSON.stringify(userId)
-  );
   await db("contacts")
     .where({ id: id })
     .del();

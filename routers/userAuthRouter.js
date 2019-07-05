@@ -93,6 +93,7 @@ router.get("/logout", (req, res) => {
 });
 
 function generateToken(user) {
+  console.log(`:: GENERATE TOKEN ::`);
   const payLoad = {
     subject: user.id,
     email: user.email

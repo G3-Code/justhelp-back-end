@@ -27,12 +27,6 @@ function findById(id) {
     .first();
 }
 
-// async function findByUserId(userId) {
-//   let result = await db("kind_acts").where({ user_id: userId });
-//   console.log(`:: FIND BY USER ID LENGTH IS :: ${result}`);
-//   return result;
-// }
-
 async function findByUserIdForHP(userId) {
   let result = await db("kind_acts").where({ user_id: userId });
   console.log(`:: FIND BY USER ID LENGTH IS :: ${result}`);
@@ -58,7 +52,6 @@ async function findByUserId(userId) {
 }
 
 async function update(id, kindAct) {
-  console.log(":::::::::::::::::KIND ACT MODEL - UPDATE :::::::::::::::::::::");
   await db("kind_acts")
     .where({ id })
     .update(kindAct);
