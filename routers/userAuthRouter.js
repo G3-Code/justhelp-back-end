@@ -43,7 +43,6 @@ router.post("/login", async (req, res) => {
       let user = await User.findBy({ email });
       console.log(`:: LOGIN :: USER IS FOUND :: ${user}`);
       if (user && bcrypt.compareSync(password, user.password)) {
-        console.log("-------------PASSWORD IS SUCCESSFUL------------");
         const token = generateToken(user);
         const contacts = await Contact.findByUserId(user.id);
         const acts = await KindAct.findByUserId(user.id);
