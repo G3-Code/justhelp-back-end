@@ -3,7 +3,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const server = express();
 
-//const userAuthRouter = require("../routers/UserAuthRouter");
+const userAuthRouter = require("../routers/UserAuthRouter");
 //const userRouter = require("../routers/UserRouter");
 // const contactRouter = require("../routers/ContactsRouter");
 // const kindActRouter = require("../routers/KindActsRouter");
