@@ -5,6 +5,7 @@ const { authenticate } = require("../auth/authenticate");
 
 router.post("/", authenticate, async (req, res) => {
   try {
+    console.log(`:: CONTACTS ROUTER :: POST ::`);
     const contactToAdd = req.body;
     if (contactToAdd) {
       const contacts = await Contacts.add(contactToAdd);
@@ -34,6 +35,7 @@ router.get("/:id", authenticate, async (req, res) => {
 
 router.get("/user/:id", authenticate, async (req, res) => {
   try {
+    console.log(`:: CONTACTS ROUTER :: GET BY USER ID ::`);
     const contacts = await Contacts.findByUserId(req.params.id);
     res.status(200).json({ contacts });
   } catch (error) {
@@ -46,6 +48,7 @@ router.get("/user/:id", authenticate, async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
+    console.log(`:: CONTACTS ROUTER :: UPDATE - PUT USING CONTACTS ID ::`);
     const contactId = req.params.id;
     const contactToBeUpdated = req.body;
     if (contactId && contactToBeUpdated) {
