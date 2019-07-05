@@ -58,6 +58,7 @@ router.put("/:id", authenticate, async (req, res) => {
 
 router.get("/:id", authenticate, async (req, res) => {
   try {
+    console.log(`:: USER ROUTER :: GET USER INFO USING USER ID ::`);
     const id = req.params.id;
     const user = await User.findBy({ id });
     if (user) {
