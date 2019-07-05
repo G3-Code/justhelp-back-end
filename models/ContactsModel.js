@@ -9,6 +9,7 @@ module.exports = {
 };
 
 async function add(contact) {
+  console.log(`:: CONTACTS MODEL :: ADD :: ${JSON.stringify(contact)}`);
   await db("contacts").insert(contact);
   return findByUserId(contact.user_id);
 }
