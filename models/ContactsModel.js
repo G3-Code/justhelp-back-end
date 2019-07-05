@@ -18,12 +18,17 @@ async function findBy(filter) {
   const result = await db("contacts")
     .where(filter)
     .first();
+  console.log(`:: CONTACT-MODEL :: FINDBY RESULT :: ${JSON.stringify(result)}`);
   return result;
 }
 
 async function findByUserId(userId) {
   const result = await db("contacts").where({ user_id: userId });
-  console.log(`:: CONTACTS MODEL :: FIND BY USER ID :: RESULT IS ${result}`);
+  console.log(
+    `:: CONTACTS MODEL :: FIND BY USER ID :: RESULT IS ${JSON.stringify(
+      result
+    )}`
+  );
   return result;
 }
 
