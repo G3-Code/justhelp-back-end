@@ -4,7 +4,7 @@ const helmet = require("helmet");
 const server = express();
 
 // const userAuthRouter = require("../routers/UserAuthRouter.js");
-// const userRouter = require("../routers/UserRouter.js");
+const userRouter = require("../routers/UserRouter.js");
 // const contactRouter = require("../routers/ContactsRouter.js");
 // const kindActRouter = require("../routers/KindActsRouter.js");
 
@@ -19,7 +19,7 @@ server.get("/", (req, res) => {
 });
 
 // server.use("/", userAuthRouter);
-// server.use("/user", userRouter);
+server.use("/user", userRouter);
 // server.use("/contact", contactRouter);
 // server.use("/kindAct", kindActRouter);
 module.exports = server;
