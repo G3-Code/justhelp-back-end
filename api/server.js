@@ -4,9 +4,9 @@ const helmet = require("helmet");
 const server = express();
 
 const userAuthRouter = require("../routers/UserAuthRouter.js");
-const userRouter = require("../routers/UserRouter");
-const contactRouter = require("../routers/ContactsRouter");
-const kindActRouter = require("../routers/KindActsRouter");
+const userRouter = require("../routers/UserRouter.js");
+const contactRouter = require("../routers/ContactsRouter.js");
+const kindActRouter = require("../routers/KindActsRouter.js");
 
 server.use(express.json());
 server.use(helmet());
