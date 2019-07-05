@@ -3,7 +3,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const server = express();
 
-const userAuthRouter = require("../routers/UserAuthRouter");
+//const userAuthRouter = require("../routers/UserAuthRouter");
 //const userRouter = require("../routers/UserRouter");
 // const contactRouter = require("../routers/ContactsRouter");
 // const kindActRouter = require("../routers/KindActsRouter");
@@ -18,7 +18,7 @@ server.get("/", (req, res) => {
     .json({ message: "The random act generator api is up and running!" });
 });
 
-server.use("/", userAuthRouter);
+//server.use("/", userAuthRouter);
 //server.use("/user", userRouter);
 // server.use("/contact", contactRouter);
 // server.use("/kindAct", kindActRouter);
