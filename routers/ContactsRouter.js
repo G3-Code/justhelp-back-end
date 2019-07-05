@@ -7,8 +7,17 @@ router.post("/", authenticate, async (req, res) => {
   try {
     console.log(`:: CONTACTS ROUTER :: POST ::`);
     const contactToAdd = req.body;
+    console.log(
+      `:: CONTACTS ROUTER :: REQUEST BODY IS :: ${JSON.stringify(contactToAdd)}`
+    );
     if (contactToAdd) {
+      console.log(`:: CONTACTS TO ADD IS AVAILABLE ::`);
       const contacts = await Contacts.add(contactToAdd);
+      console.log(
+        `:: CONTACTS ROUTER :: LIST OF CONTACTS IS :: ${JSON.stringify(
+          contacts
+        )}`
+      );
       res.status(201).json({ contacts });
     } else {
       res.status(400).json({
